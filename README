@@ -12,6 +12,18 @@ TODO:
  1.) Create a master qdisk that polices all vm traffic to a % of the servers overall bandwidth
  2.) Parse the openstack flavor name from the libvirt xml and apply differnt policies
 
+Install:
 
+1.) Copy qemu-hook to /etc/libvirt/qemu/hook
+(yes the name of the file changes from qemu-hook to hook)
+
+2.) chmod 644 /etc/libvirt/qemu/hook
+
+3.) Reload libvirt so that it will process the libvirt hook file:
+systemctl reload libvirtd
+
+Any vm's will have the TC rules applied to them on start.
+You can backfill existing VM's via a script your own choosing.
 
 This hook was developed by kurt payne (kpayne@godaddy.com) and Jim Gorz (jgorz@godaddy.com)
+It was based on the hook found here: https://github.com/rhardouin/libvirt_hooks
